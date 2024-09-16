@@ -3,7 +3,9 @@
 	"type": "module",
 	"types": "./dist/index.d.ts",
 	"module": "./dist/index.mjs",
-	"files": ["dist/"],
+	"files": [
+		"dist/"
+	],
 	"exports": {
 		".": {
 			"types": "./src/index.ts",
@@ -17,12 +19,23 @@
 		"build": "unbuild",
 		"postinstall": "pnpm build:stub"
 	},
-	"devDependencies": {},
-	"dependencies": {
-		"@workspace/llm-utils": "workspace:*"
+	"devDependencies": {
+		"@apache-arrow/ts": "^17.0.0",
+		"@lancedb/lancedb": "^0.10.0",
+		"@payloadcms/db-postgres": "^3.0.0-beta.107",
+		"@types/dockerode": "^3.3.31",
+		"dockerode": "^4.0.2",
+		"ollama": "^0.5.9"
 	},
-	"bundledDependencies": ["@workspace/llm-utils"],
+	"dependencies": {
+		"@workspace/llm-utils": "workspace:*",
+		"defu": "^6.1.4",
+		"radash": "^12.1.0"
+	},
+	"bundledDependencies": [
+		"@workspace/llm-utils"
+	],
 	"peerDependencies": {
-		"payload": "^3.0.0-beta.106"
+		"payload": "^3.0.0-beta.107"
 	}
 }
