@@ -191,7 +191,7 @@ export default buildConfig({
     payloadCloudPlugin(), // storage-adapter-placeholder
     semanticSearchPlugin({enabled:true, vectorDB: await LanceDB.create('./db/lancedb/'), dimensions:768, indexableFields:['posts.content'] })
   ],
-  secret: process.env.PAYLOAD_SECRET!,
+  secret: process.env.PAYLOAD_SECRET ??'secret',
   sharp,
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
