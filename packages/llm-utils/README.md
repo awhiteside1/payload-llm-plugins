@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Common types and functions related to LLMs that can be used throughout the repo and bundled into packages as used. 
+Common types and functions related to LLMs that can be used throughout the repo and bundled into packages as used.
 
 ## Use Cases
 
@@ -16,4 +16,3 @@ Common types and functions related to LLMs that can be used throughout the repo 
 - Configure the fields to index (can be virtual)
 - Each field (on create and update) is embedded and stored in the vector db referencing the original ID
 - Exposes a lookup function and an enhanced search UI
-

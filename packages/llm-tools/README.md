@@ -18,9 +18,8 @@ Intended for use with [@payload-llm-plugins/chat](../chat/README.md), but compat
 ## Available Tools
 
 | Tool          | Description                                                                 |
-|---------------|-----------------------------------------------------------------------------|
+| ------------- | --------------------------------------------------------------------------- |
 | Create Record | Creates a new record in the specified collection with provided data         |
 | Update Record | Modifies an existing record in the specified collection with new data       |
 | Query Records | Performs a search or retrieval operation on records based on given criteria |
 | Generate Link | Creates a URL or reference to a specific record or resource in the CMS      |
-

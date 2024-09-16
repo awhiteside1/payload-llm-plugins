@@ -7,7 +7,7 @@
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"lint": "biome check .",
 		"prettier": "prettier -w .",
-		"lint:fix": "prettier && biome check --write . ",
+		"lint:fix": "pnpm run prettier && biome check --write . ",
 		"build": "pnpm run -r build",
 		"clean": "find . -type d -name \"dist\" -exec rm -r {} +"
 	},
@@ -27,6 +27,5 @@
 		"unbuild": "^2.0.0",
 		"payload": "^3.0.0-beta.106"
 	},
-	"prettier": {
-	}
+	"prettier": {}
 }

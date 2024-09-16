@@ -1,6 +1,6 @@
 # payload-llm-plugins
 
-A collection of PayloadCMS plugins to simplify integrating with AI / LLMs like Bedrock and OpenAI. Each package can be used independently, but are designed to work together.  
+A collection of PayloadCMS plugins to simplify integrating with AI / LLMs like Bedrock and OpenAI. Each package can be used independently, but are designed to work together.
 
 ## Plugins
 
@@ -15,5 +15,3 @@ Extends PayloadCMS with ChatBot functionality aware of your documents.
 ### [LLM Tools](packages/llm-tools/README.md)
 
 Defines LLM-friendly tools for interacting with Payload CMS.
-
-
