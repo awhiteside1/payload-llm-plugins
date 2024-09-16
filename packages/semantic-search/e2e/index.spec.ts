@@ -2,7 +2,7 @@ import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { MongoMemoryReplSet } from 'mongodb-memory-server'
 import payload, { buildConfig, type Payload } from 'payload'
 import { list } from 'radash'
-import { beforeAll, expect } from 'vitest'
+import { afterAll, beforeAll, expect } from 'vitest'
 import { semanticSearchPlugin } from '../src'
 import {
 	givenACollectionConfig,
@@ -10,8 +10,9 @@ import {
 	givenAnEnvironment,
 } from './_setup/createConfig'
 
-describe('Semantic Search', () => {
+describe('Semantic Search', async () => {
 	let instance: Payload
+	const mongo = await MongoMemoryReplSet.create()
 
 	const spys = {
 		embeddingSpy: vi.fn(() =>
@@ -21,8 +22,6 @@ describe('Semantic Search', () => {
 	}
 
 	beforeAll(async () => {
-		const mongo = await MongoMemoryReplSet.create()
-
 		const environment = givenAnEnvironment({
 			collections: [givenACollectionConfig({ slug: 'myCollection' })],
 			plugins: [
@@ -38,10 +37,13 @@ describe('Semantic Search', () => {
 		})
 		instance = await payload.init({
 			config: buildConfig(environment),
-			loggerOptions: { enabled: true },
+			loggerOptions: { enabled: false },
 		})
 	})
 
+	afterAll(async () => {
+		await mongo.stop()
+	})
 	it('should insert a vector on create', async () => {
 		const item = await instance.create({
 			collection: 'myCollection',

@@ -1,6 +1,7 @@
 {
 	"name": "@payload-llm-plugins/semantic-search",
 	"type": "module",
+	"version": "0.0.1",
 	"types": "./dist/index.d.ts",
 	"module": "./dist/index.mjs",
 	"files": ["dist/"],
@@ -11,6 +12,7 @@
 		}
 	},
 	"scripts": {
+		"prepack": "pnpm run build",
 		"test": "vitest --run",
 		"bench": "vitest --run bench",
 		"build:stub": "unbuild --stub",
@@ -32,7 +34,6 @@
 		"defu": "^6.1.4",
 		"radash": "^12.1.0"
 	},
-	"bundledDependencies": ["@workspace/llm-utils"],
 	"peerDependencies": {
 		"payload": "^3.0.0-beta.107"
 	}

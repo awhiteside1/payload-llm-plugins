@@ -40,6 +40,9 @@ export default async function setup({ provide }: GlobalSetupContext) {
 		await mongo.start()
 	}
 	provide('mongoURL', mongo.getUri())
+	return async () => {
+		await mongo.stop()
+	}
 }
 
 declare module 'vitest' {
