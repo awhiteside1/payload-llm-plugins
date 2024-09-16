@@ -3,25 +3,32 @@ on:
   push:
 
 jobs:
-  build:
-    runs-on: ubuntu-22.04
-    strategy:
-      matrix:
-        node-version: [20]
+  cache_checkout:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
           version: 9
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 22
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install
-      - name: Lint
-        run: pnpm lint
+  build:
+    needs: cache_checkout
+    steps:
       - name: Build
         run: pnpm build
+
+
+  test:
+    needs: cache_checkout
+    steps:
+      - name: Lint
+        run: pnpm lint
+      - name: Test
+        run: pnpm test
