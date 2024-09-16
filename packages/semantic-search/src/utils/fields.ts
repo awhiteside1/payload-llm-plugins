@@ -1,9 +1,4 @@
-import type {
-	CollectionConfig,
-	Config,
-	TextField,
-	TextareaField,
-} from 'payload'
+import type {CollectionConfig, Config, TextareaField, TextField,} from 'payload'
 
 export interface FieldEntry {
 	collectionConfig: CollectionConfig

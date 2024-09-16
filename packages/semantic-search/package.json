@@ -9,6 +9,10 @@
 		".": {
 			"types": "./src/index.ts",
 			"default": "./dist/index.mjs"
+		},
+		"./lancedb": {
+			"types": "./src/components/lancedb/index.ts",
+			"default": "./dist/components/lancedb/index.mjs"
 		}
 	},
 	"scripts": {
@@ -20,16 +24,16 @@
 		"postinstall": "pnpm build:stub"
 	},
 	"devDependencies": {
-		"@lancedb/lancedb": "0.10.0",
+
 		"@payloadcms/db-mongodb": "^3.0.0-beta.107",
 		"@payloadcms/db-postgres": "^3.0.0-beta.107",
-		"@types/dockerode": "^3.3.31",
-		"apache-arrow": "^17.0.0",
 		"dockerode": "^4.0.2",
-		"mongodb-memory-server": "^10.0.0",
-		"ollama": "^0.5.9"
+		"mongodb-memory-server": "^10.0.0"
 	},
 	"dependencies": {
+		"apache-arrow": "^17.0.0",
+		"ollama": "^0.5.9",
+		"@lancedb/lancedb": "0.10.0",
 		"@workspace/llm-utils": "workspace:*",
 		"defu": "^6.1.4",
 		"pathe": "^1.1.2",

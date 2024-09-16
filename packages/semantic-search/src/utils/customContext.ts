@@ -1,10 +1,9 @@
-import type { Config } from 'payload'
-import { isObject } from 'radash'
-import type { SemanticSearchPluginConfig, VectorDB } from '../types'
+import type {Config} from 'payload'
+import {isObject} from 'radash'
+import type {VectorDB} from '../types'
 
 export type SemanticSearchCustomObject = {
 	vectorDB: VectorDB
-	embeddingFn: SemanticSearchPluginConfig['embeddingFn']
 }
 
 export const CUSTOMKEY = 'semantic-search'

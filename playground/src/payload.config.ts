@@ -30,6 +30,7 @@ import {Header} from './Header/config'
 import {revalidateRedirects} from './hooks/revalidateRedirects'
 import {GenerateTitle, GenerateURL} from '@payloadcms/plugin-seo/types'
 import {Page, Post} from './payload-types'
+import {LanceDB} from "@payload-llm-plugins/semantic-search/lancedb";
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -188,7 +189,7 @@ export default buildConfig({
       },
     }),
     payloadCloudPlugin(), // storage-adapter-placeholder
-    semanticSearchPlugin({enabled:true, vectorDB: LanceDB.create('')})
+    semanticSearchPlugin({enabled:true, vectorDB: await LanceDB.create('./db/lancedb/'), dimensions:768, indexableFields:['posts.content'] })
   ],
   secret: process.env.PAYLOAD_SECRET!,
   sharp,
