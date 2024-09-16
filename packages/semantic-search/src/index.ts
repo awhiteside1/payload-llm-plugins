@@ -31,7 +31,6 @@ const setupFields = (config: Config, indexableFields: Array<string>) => {
 				hooks: { afterChange: [afterChangeHook] } satisfies FieldBase['hooks'],
 			}),
 		)
-		console.log(field.fieldConfig)
 	}
 }
 
