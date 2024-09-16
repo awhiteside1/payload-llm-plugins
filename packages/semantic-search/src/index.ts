@@ -1,1 +1,1 @@
-export const adder = (a:number,b:number)=> a+b
+export { adder } from '@workspace/llm-utils'
