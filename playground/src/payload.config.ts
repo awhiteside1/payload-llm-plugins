@@ -116,7 +116,7 @@ export default buildConfig({
   }),
   db: sqliteAdapter({
     client: {
-      url: process.env.DATABASE_URI || '',
+      url: process.env.DATABASE_URI || 'file:./db/playground.db',
     },
   }),
   collections: [Pages, Posts, Media, Categories, Users],
