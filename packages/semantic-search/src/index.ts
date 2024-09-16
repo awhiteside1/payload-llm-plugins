@@ -16,7 +16,6 @@ export const semanticSearchPlugin =
 
 		return setupSemanticSearchCustom(config, {
 			vectorDB: incomingPluginConfig.vectorDB,
-			embeddingFn: incomingPluginConfig.vectorDB,
 		})
 	}
 

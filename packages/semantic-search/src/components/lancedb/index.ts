@@ -1,8 +1,10 @@
 import { type Table, connect } from '@lancedb/lancedb'
-import { LanceSchema } from '@lancedb/lancedb/embedding'
+import { LanceSchema, getRegistry } from '@lancedb/lancedb/embedding'
 import { Utf8 } from 'apache-arrow'
 import type { Identifier, InsertFields, VectorDB } from '../../types'
-import { OllamaEmbeddings } from '../ollama'
+import { OllamaEmbeddings, register } from '../ollama'
+
+register()
 
 export class LanceDB implements VectorDB {
 	public name = 'lancedb'

@@ -1,9 +1,4 @@
-import { embedding } from '@lancedb/lancedb'
-import {
-	EmbeddingFunction,
-	TextEmbeddingFunction,
-	getRegistry,
-} from '@lancedb/lancedb/embedding'
+import { TextEmbeddingFunction, getRegistry } from '@lancedb/lancedb/embedding'
 import type { Float } from 'apache-arrow'
 import { Ollama } from 'ollama'
 
@@ -12,8 +7,7 @@ interface Options {
 	timeout: number
 	host: string
 }
-// @ts-ignore
-@embedding.register('ollama')
+
 export class OllamaEmbeddings extends TextEmbeddingFunction<Partial<Options>> {
 	private client: Ollama
 	constructor(private modelOptions: Options) {
