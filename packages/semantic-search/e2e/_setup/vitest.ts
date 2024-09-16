@@ -1,6 +1,6 @@
-import type {GlobalSetupContext} from 'vitest/node'
 import Docker from 'dockerode'
-import {sleep, uid} from 'radash'
+import { sleep, uid } from 'radash'
+import type { GlobalSetupContext } from 'vitest/node'
 
 export const givenAPostgres = async () => {
 	const docker = new Docker()

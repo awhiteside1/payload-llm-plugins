@@ -1,8 +1,8 @@
-import payload, {buildConfig, type Payload} from 'payload'
-import {givenAnEnvironment} from './setup'
-import {afterAll, beforeAll, expect, inject} from 'vitest'
-import {semanticSearchPlugin} from '../src'
-import {list} from 'radash'
+import payload, { buildConfig, type Payload } from 'payload'
+import { list } from 'radash'
+import { afterAll, beforeAll, expect, inject } from 'vitest'
+import { semanticSearchPlugin } from '../src'
+import { givenAnEnvironment } from './setup'
 
 describe('Semantic Search', () => {
 	let instance: Payload

@@ -1,6 +1,6 @@
-import type {FieldHook, FieldHookArgs} from 'payload'
-import {getSemanticSearchCustom} from '../utils/customContext'
-import {isObject, isString} from 'radash'
+import type { FieldHook, FieldHookArgs } from 'payload'
+import { isObject, isString } from 'radash'
+import { getSemanticSearchCustom } from '../utils/customContext'
 
 export const afterChangeHook: FieldHook = (args) => {
 	if (args.operation === 'create' || args.operation === 'update') {

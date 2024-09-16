@@ -3,9 +3,7 @@
 	"type": "module",
 	"types": "./dist/index.d.ts",
 	"module": "./dist/index.mjs",
-	"files": [
-		"dist/"
-	],
+	"files": ["dist/"],
 	"exports": {
 		".": {
 			"types": "./src/index.ts",
@@ -32,9 +30,7 @@
 		"defu": "^6.1.4",
 		"radash": "^12.1.0"
 	},
-	"bundledDependencies": [
-		"@workspace/llm-utils"
-	],
+	"bundledDependencies": ["@workspace/llm-utils"],
 	"peerDependencies": {
 		"payload": "^3.0.0-beta.107"
 	}

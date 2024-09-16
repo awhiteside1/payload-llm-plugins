@@ -1,9 +1,9 @@
-import type {Config, FieldBase} from 'payload'
-import type {SemanticSearchPluginConfig} from './types'
 import defu from 'defu'
-import {getField, parseFields} from './utils/fields'
-import {afterChangeHook} from './hooks/afterChangeHook'
-import {setupSemanticSearchCustom} from './utils/customContext'
+import type { Config, FieldBase } from 'payload'
+import { afterChangeHook } from './hooks/afterChangeHook'
+import type { SemanticSearchPluginConfig } from './types'
+import { setupSemanticSearchCustom } from './utils/customContext'
+import { getField, parseFields } from './utils/fields'
 
 export const semanticSearchPlugin =
 	(incomingPluginConfig: SemanticSearchPluginConfig) =>
@@ -25,12 +25,14 @@ const setupFields = (config: Config, indexableFields: Array<string>) => {
 	for (const entry of fields) {
 		const field = getField(config, entry.collection, entry.field)
 		if (!field) continue
-		Object.assign(field.fieldConfig, defu(field.fieldConfig, {
-			hooks: { afterChange: [afterChangeHook] } satisfies FieldBase['hooks'],
-		}))
+		Object.assign(
+			field.fieldConfig,
+			defu(field.fieldConfig, {
+				hooks: { afterChange: [afterChangeHook] } satisfies FieldBase['hooks'],
+			}),
+		)
 		console.log(field.fieldConfig)
 	}
 }
 
-
-export type {SemanticSearchPluginConfig, VectorDB}from './types'
+export type { SemanticSearchPluginConfig, VectorDB } from './types'
