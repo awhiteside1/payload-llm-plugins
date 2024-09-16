@@ -1,0 +1,28 @@
+{
+	"name": "@payload-llm-plugins/semantic-search",
+	"type": "module",
+	"types": "./dist/index.d.ts",
+	"module": "./dist/index.mjs",
+	"files": ["dist/"],
+	"exports": {
+		".": {
+			"types": "./src/index.ts",
+			"default": "./dist/index.mjs"
+		}
+	},
+	"scripts": {
+		"test": "vitest --run",
+		"bench": "vitest --run bench",
+		"build:stub": "unbuild --stub",
+		"build": "unbuild",
+		"postinstall": "pnpm build:stub"
+	},
+	"devDependencies": {},
+	"dependencies": {
+		"@workspace/llm-utils": "workspace:*"
+	},
+	"bundledDependencies": ["@workspace/llm-utils"],
+	"peerDependencies": {
+		"payload": "^3.0.0-beta.106"
+	}
+}

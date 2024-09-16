@@ -1,0 +1,21 @@
+{
+	"name": "@workspace/llm-utils",
+	"type": "module",
+	"types": "./dist/index.d.ts",
+	"module": "./dist/index.mjs",
+	"files": ["dist/"],
+	"exports": {
+		".": {
+			"types": "./src/index.ts",
+			"default": "./dist/index.mjs"
+		}
+	},
+	"scripts": {
+		"test": "vitest --run",
+		"bench": "vitest --run bench",
+		"build:stub": "unbuild --stub",
+		"build": "unbuild",
+		"postinstall": "pnpm build:stub"
+	},
+	"devDependencies": {}
+}
