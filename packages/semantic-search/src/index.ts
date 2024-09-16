@@ -1,9 +1,9 @@
 import defu from 'defu'
-import type {Config, FieldBase} from 'payload'
-import {afterChangeHook} from './hooks/afterChangeHook'
-import type {SemanticSearchPluginConfig} from './types'
-import {setupSemanticSearchCustom} from './utils/customContext'
-import {getField, parseFields} from './utils/fields'
+import type { Config, FieldBase } from 'payload'
+import { afterChangeHook } from './hooks/afterChangeHook'
+import type { SemanticSearchPluginConfig } from './types'
+import { setupSemanticSearchCustom } from './utils/customContext'
+import { getField, parseFields } from './utils/fields'
 
 export const semanticSearchPlugin =
 	(incomingPluginConfig: SemanticSearchPluginConfig) =>

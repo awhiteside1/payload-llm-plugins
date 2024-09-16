@@ -1,6 +1,6 @@
-import {getRegistry, TextEmbeddingFunction,} from '@lancedb/lancedb/embedding'
-import type {Float} from 'apache-arrow'
-import {Ollama} from 'ollama'
+import { TextEmbeddingFunction, getRegistry } from '@lancedb/lancedb/embedding'
+import type { Float } from 'apache-arrow'
+import { Ollama } from 'ollama'
 
 interface Options {
 	model: string

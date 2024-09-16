@@ -24,7 +24,6 @@
 		"postinstall": "pnpm build:stub"
 	},
 	"devDependencies": {
-
 		"@payloadcms/db-mongodb": "^3.0.0-beta.107",
 		"@payloadcms/db-postgres": "^3.0.0-beta.107",
 		"dockerode": "^4.0.2",

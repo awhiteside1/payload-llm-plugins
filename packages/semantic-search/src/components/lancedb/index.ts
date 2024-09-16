@@ -1,8 +1,8 @@
-import {connect, type Table} from '@lancedb/lancedb'
-import {getRegistry, LanceSchema} from '@lancedb/lancedb/embedding'
-import {Utf8} from 'apache-arrow'
-import type {Identifier, InsertFields, VectorDB} from '../../types'
-import {OllamaEmbeddings, register} from '../ollama'
+import { type Table, connect } from '@lancedb/lancedb'
+import { LanceSchema, getRegistry } from '@lancedb/lancedb/embedding'
+import { Utf8 } from 'apache-arrow'
+import type { Identifier, InsertFields, VectorDB } from '../../types'
+import { OllamaEmbeddings, register } from '../ollama'
 
 register()
 
@@ -25,7 +25,6 @@ export class LanceDB implements VectorDB {
 	}
 
 	static async create(path = './lancedb') {
-
 		const func = new OllamaEmbeddings({
 			host: 'http://100.67.29.127:11434',
 			model: 'nomic-embed-text',
