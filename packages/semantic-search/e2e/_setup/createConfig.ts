@@ -1,8 +1,6 @@
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import defu from 'defu'
-import { MongoMemoryReplSet } from 'mongodb-memory-server'
 import type { CollectionConfig, Config } from 'payload'
-import { uid } from 'radash'
 import { inject } from 'vitest'
 import type { VectorDB } from '../../src'
 
@@ -26,6 +24,11 @@ export const givenAnEnvironment = (base: Partial<Config>): Config => {
 		// }),
 		db: mongooseAdapter({ url: inject('mongoURL') }),
 		plugins: [],
+		logger: {
+			options: {
+				enabled: false,
+			},
+		},
 	}
 
 	return defu(base, config) as Config

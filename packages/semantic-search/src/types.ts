@@ -4,7 +4,7 @@ type VectorStoreTable = {
 	/**
 	 * Vector representation
 	 */
-	vector: number[]
+	vector?: number[]
 	/**
 	 * The collection this embedding is from
 	 */
@@ -17,27 +17,26 @@ type VectorStoreTable = {
 	 * The document this refers to
 	 */
 	documentId: string | number
-	/**
-	 * When this entry was created
-	 */
-	modified: Date
+
+	text: string
 }
 
-type InsertFields = Omit<VectorStoreTable, 'modified'>
-type Identifier = Pick<VectorStoreTable, 'collection' | 'documentId' | 'field'>
+export type InsertFields = Omit<VectorStoreTable, 'modified'>
+export type Identifier = Pick<
+	VectorStoreTable,
+	'collection' | 'documentId' | 'field'
+>
 type Index = Pick<VectorStoreTable, 'collection' | 'field'>
 type Result = Omit<VectorStoreTable, 'vector'> & { distance: number }
 
 export type VectorDB = {
 	name: string
-	createTable: (dimensions: number) => Promise<void>
 	upsert: (fields: InsertFields) => Promise<void>
 	delete: (record: Identifier) => Promise<void>
-	search: (index: Index, queryVector: number[]) => Result
+	search: (index: Index, query: string) => Promise<Partial<Result>[]>
 }
 
 export type SemanticSearchPluginConfig = {
-	embeddingFn: EmbeddingFunction
 	enabled: boolean
 	dimensions: number
 	/**

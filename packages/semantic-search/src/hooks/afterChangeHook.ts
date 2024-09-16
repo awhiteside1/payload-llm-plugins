@@ -32,10 +32,9 @@ const insertEmbedding = async ({
 	)
 		return
 
-	const vector = await semanticSearch.embeddingFn(value)
 	await semanticSearch.vectorDB.upsert({
+		text: value,
 		collection: collection.slug,
-		vector,
 		field: field.name,
 		documentId: originalDoc.id as string | number,
 	})
