@@ -20,9 +20,11 @@
 	"devDependencies": {
 		"@apache-arrow/ts": "^17.0.0",
 		"@lancedb/lancedb": "^0.10.0",
+		"@payloadcms/db-mongodb": "^3.0.0-beta.107",
 		"@payloadcms/db-postgres": "^3.0.0-beta.107",
 		"@types/dockerode": "^3.3.31",
 		"dockerode": "^4.0.2",
+		"mongodb-memory-server": "^10.0.0",
 		"ollama": "^0.5.9"
 	},
 	"dependencies": {

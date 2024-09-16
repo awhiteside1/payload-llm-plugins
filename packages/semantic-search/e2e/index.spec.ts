@@ -1,8 +1,14 @@
+import { mongooseAdapter } from '@payloadcms/db-mongodb'
+import { MongoMemoryReplSet } from 'mongodb-memory-server'
 import payload, { buildConfig, type Payload } from 'payload'
 import { list } from 'radash'
-import { afterAll, beforeAll, expect, inject } from 'vitest'
+import { beforeAll, expect } from 'vitest'
 import { semanticSearchPlugin } from '../src'
-import { givenAnEnvironment } from './setup'
+import {
+	givenACollectionConfig,
+	givenAVectorDB,
+	givenAnEnvironment,
+} from './_setup/createConfig'
 
 describe('Semantic Search', () => {
 	let instance: Payload
@@ -15,36 +21,28 @@ describe('Semantic Search', () => {
 	}
 
 	beforeAll(async () => {
-		const postgres = inject('postgresURL')
-		const environment = givenAnEnvironment(postgres)
-		environment.plugins?.push(
-			semanticSearchPlugin({
-				vectorDB: {
-					name: 'mock',
-					upsert: spys.upsertSpy,
-					search: vi.fn(),
-					createTable: vi.fn(),
-					delete: vi.fn(),
-				},
-				indexableFields: ['myCollection.description'],
-				enabled: true,
-				dimensions: 768,
-				embeddingFn: spys.embeddingSpy,
-			}),
-		)
+		const mongo = await MongoMemoryReplSet.create()
+
+		const environment = givenAnEnvironment({
+			collections: [givenACollectionConfig({ slug: 'myCollection' })],
+			plugins: [
+				semanticSearchPlugin({
+					vectorDB: givenAVectorDB({ upsert: spys.upsertSpy }),
+					indexableFields: ['myCollection.description'],
+					enabled: true,
+					dimensions: 768,
+					embeddingFn: spys.embeddingSpy,
+				}),
+			],
+			db: mongooseAdapter({ mongoMemoryServer: mongo, url: mongo.getUri() }),
+		})
 		instance = await payload.init({
 			config: buildConfig(environment),
-			loggerOptions: { enabled: false },
+			loggerOptions: { enabled: true },
 		})
 	})
 
-	afterAll(async () => {
-		try {
-			await instance.db.pool.end()
-		} catch (err) {}
-	})
-
-	it('should work', async () => {
+	it('should insert a vector on create', async () => {
 		const item = await instance.create({
 			collection: 'myCollection',
 			data: { description: 'hello' },
@@ -53,7 +51,7 @@ describe('Semantic Search', () => {
 		expect(spys.embeddingSpy).toHaveBeenCalledWith('hello')
 		expect(spys.upsertSpy).toHaveBeenCalledWith(
 			expect.objectContaining({
-				documentId: 1,
+				documentId: item.id,
 				collection: 'myCollection',
 				field: 'description',
 			}),

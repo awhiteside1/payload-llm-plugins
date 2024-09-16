@@ -1,4 +1,5 @@
 import Docker from 'dockerode'
+import { MongoMemoryReplSet } from 'mongodb-memory-server'
 import { sleep, uid } from 'radash'
 import type { GlobalSetupContext } from 'vitest/node'
 
@@ -34,19 +35,16 @@ export const givenAPostgres = async () => {
 }
 
 export default async function setup({ provide }: GlobalSetupContext) {
-	const postgres = await givenAPostgres()
-
-	provide('postgresURL', postgres.url)
-
-	return async () => {
-		console.log('starting shutdown')
-		await postgres.shutdown()
-		console.log(' shutdown complete')
+	const mongo = await MongoMemoryReplSet.create({})
+	if (mongo.state === 'stopped') {
+		await mongo.start()
 	}
+	provide('mongoURL', mongo.getUri())
 }
 
 declare module 'vitest' {
 	export interface ProvidedContext {
 		postgresURL: string
+		mongoURL: string
 	}
 }
