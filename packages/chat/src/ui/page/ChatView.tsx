@@ -1,3 +1,5 @@
+import '../tailwind.css'
+
 import type {AdminViewProps} from 'payload'
 //@ts-ignore
 // biome-ignore lint/style/useImportType: <explanation>
@@ -57,7 +59,7 @@ import {ConversationsList} from './ConversationsList'
 
 	return (
 		<>
-		<script src="https://cdn.tailwindcss.com"/>
+		{/*<script src="https://cdn.tailwindcss.com"/>*/}
 	 <div
 		 style={{
 			 paddingLeft: 'var(--gutter-h)',

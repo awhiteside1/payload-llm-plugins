@@ -21,6 +21,9 @@
 		"build": "unbuild",
 		"postinstall": "pnpm build:stub"
 	},
+	"peerDependencies": {
+		"payload": "beta"
+	},
 	"dependencies": {
 		"radash": "^12.1.0"
 	}
