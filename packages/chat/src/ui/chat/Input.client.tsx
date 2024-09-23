@@ -15,6 +15,7 @@ export const SendMessageUI = ({ chatId }: ChatId) => {
 			<input
 				name="message"
 				id="message"
+				required
 				className="flex-grow p-2 border border-gray-300 rounded-l"
 				placeholder="Type your message..."
 			/>

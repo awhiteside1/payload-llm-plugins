@@ -3,6 +3,8 @@ import type {Chat, User} from '../../payload-types'
 import {headers} from 'next/headers'
 import config from '@payload-config'
 import {get, isString} from 'radash'
+import {revalidatePath} from 'next/cache'
+import {redirect} from 'next/navigation'
 
 interface Props {
 	message: string
@@ -37,6 +39,14 @@ export async function insertMessageAction(data: FormData) {
 			messages: [{ role: 'user', text: message }],
 			user: get<number>(user, 'id'),
 		} satisfies Partial<Chat>
-		await instance.create({ collection: 'chats', data: chat, user })
+		const newChat = await instance.create({
+			collection: 'chats',
+			data: chat,
+			user,
+		})
+		const id = get<number>(newChat, 'id')
+		redirect(`/admin/chat/${id}`)
 	}
+
+	revalidatePath(`/admin/chat/${chatId}`)
 }
