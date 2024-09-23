@@ -9,6 +9,7 @@ export default defineConfig({
 	plugins: [tsconfigPaths(), react(),  libInjectCss(),externalizeDeps(), dts({copyDtsFiles:true, outDir:'dist', })],
 	build: {
 		outDir: 'dist/ui/page',
+		sourcemap:true,
 		lib: {
 			entry: ['./src/ui/page/ChatView.tsx'],
 			formats: ['es', 'cjs']

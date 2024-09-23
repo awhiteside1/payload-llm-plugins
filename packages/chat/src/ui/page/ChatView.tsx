@@ -10,7 +10,7 @@ import {redirect} from 'next/navigation'
 import {ChatUI} from '../chat'
 import {ConversationsList} from './ConversationsList'
 
- const ChatView: React.FC<AdminViewProps> = ({
+const ChatView: React.FC<AdminViewProps> = ({
 	initPageResult,
 	params,
 	searchParams,
@@ -43,7 +43,7 @@ import {ConversationsList} from './ConversationsList'
 			}))
 		}).catch(console.error)
 
-	const chatId = params?.chat
+	const chatId = 1
 	const chat = chatId
 		? payload
 				.find({
@@ -51,7 +51,10 @@ import {ConversationsList} from './ConversationsList'
 					where: { id: { equals: chatId } },
 				})
 				.then((chats) => {
+					console.log(chats)
 					const chat = chats.docs[0]
+					console.log(chat)
+
 					if (!chat) return { messages: [] }
 					return { ...chat, messages: chat.messages }
 				}).catch(console.error)
@@ -59,25 +62,25 @@ import {ConversationsList} from './ConversationsList'
 
 	return (
 		<>
-		{/*<script src="https://cdn.tailwindcss.com"/>*/}
-	 <div
-		 style={{
-			 paddingLeft: 'var(--gutter-h)',
-					paddingRight: 'var(--gutter-h)',
-				}}
-			>
-				<h1>Conversations</h1>
-				<div className="w-full max-h-full flex flex-row flex-grow ">
-					<Suspense fallback={<p>Loading</p>}>
-					<ConversationsList conversations={conversations} />
-					<ChatUI chat={chat} />
-					</Suspense>
+			<div className="flex flex-col h-screen">
+				<header className="bg-gray-800 text-white p-4">
+					<h1 className="text-xl">Conversations</h1>
+				</header>
+				<div className="flex flex-grow overflow-hidden">
+					<aside className="w-1/4 bg-gray-100 p-4 overflow-y-auto">
+						<Suspense fallback={<p>Loading</p>}>
+							<ConversationsList conversations={conversations} />
+						</Suspense>
+					</aside>
+					<main className="flex-grow p-4 flex flex-col">
+						<Suspense fallback={<p>Loading</p>}>
+							<ChatUI chat={chat} />
+						</Suspense>
+					</main>
 				</div>
 			</div>
 		</>
 	)
-
- }
-
+}
 
 export default ChatView

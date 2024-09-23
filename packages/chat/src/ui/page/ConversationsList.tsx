@@ -12,11 +12,11 @@ export const ConversationsList = ({
 
 	const convos = use(conversations)
 	return (
-		<div className="conversations-list">
+		<div className="conversations-list space-y-2">
 			{convos?.map((convo) => (
-				<a key={convo.id} href={`#${convo.id}`}>
+				<a key={convo.id} href={`#${convo.id}`} className="block p-2 bg-white rounded shadow hover:bg-gray-200">
 					<div className="conversation">
-						<p>{convo.description}</p>
+						<p className="text-gray-800">{convo.description}</p>
 					</div>
 				</a>
 			))}
