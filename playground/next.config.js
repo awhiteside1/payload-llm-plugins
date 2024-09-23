@@ -8,6 +8,10 @@ const NEXT_PUBLIC_SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://loc
 const nextConfig = {
   webpack(config) {
     config.externals.push('@lancedb/lancedb')
+    config.snapshot ={
+      ...(config.snapshot ?? {}),
+      managedPaths: [/^(.+?[\\/]node_modules[\\/])(?!@payload-llm-plugins)/],
+    }
     return config;
   },
     serverExternalPackages:['@payload-llm-plugins/semantic-search','@lancedb/lancedb'],

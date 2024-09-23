@@ -3,19 +3,50 @@
 	"type": "module",
 	"types": "./dist/index.d.ts",
 	"module": "./dist/index.mjs",
-	"files": ["dist/"],
+	"files": ["dist/", "*.css"],
 	"exports": {
+		"./ChatView": {
+			"types": "./dist/ui/page/ChatView.d.ts",
+			"import": "./dist/ui/page/ChatView.mjs",
+			"default": "./dist/ui/page/ChatView.cjs"
+		},
 		".": {
-			"types": "./src/index.ts",
-			"default": "./dist/index.mjs"
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.mjs",
+			"default": "./dist/index.cjs"
 		}
 	},
 	"scripts": {
 		"test": "vitest --run",
 		"bench": "vitest --run bench",
 		"build:stub": "unbuild --stub",
-		"build": "unbuild",
-		"postinstall": "pnpm build:stub"
+		"build": "unbuild --sourcemap",
+		"postinstall": "pnpm build:stub",
+		"tailwind": "npx tailwindcss -i ./src/ui/tailwind.css -o ./dist/ui/tailwind.css"
 	},
-	"devDependencies": {}
+	"dependencies": {
+		"tsup": "^8.3.0",
+		"@payloadcms/next": "beta",
+		"@payloadcms/ui": "beta",
+		"@workspace/llm-utils": "workspace:*",
+		"defu": "^6.1.4",
+		"ollama": "^0.5.9",
+		"openai": "^4.61.1",
+		"pathe": "^1.1.2",
+		"radash": "^12.1.0",
+		"type-fest": "^4.26.1",
+		"postcss": "^8.4.47",
+		"tailwindcss": "^3.4.12"
+	},
+	"peerDependencies": {
+		"next": "^14.2.13",
+		"payload": "beta",
+		"react": "^18.3.1"
+	},
+	"devDependencies": {
+		"@types/react": "18.3.7"
+	},
+	"unbuild": {
+		"sourcemap": true
+	}
 }

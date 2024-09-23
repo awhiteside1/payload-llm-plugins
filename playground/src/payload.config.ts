@@ -31,6 +31,7 @@ import {revalidateRedirects} from './hooks/revalidateRedirects'
 import {GenerateTitle, GenerateURL} from '@payloadcms/plugin-seo/types'
 import {Page, Post} from './payload-types'
 import {LanceDB} from "@payload-llm-plugins/semantic-search/lancedb";
+import {chatPlugin} from "@payload-llm-plugins/chat";
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -189,7 +190,8 @@ export default buildConfig({
       },
     }),
     payloadCloudPlugin(), // storage-adapter-placeholder
-    semanticSearchPlugin({enabled:true, vectorDB: await LanceDB.create('./db/lancedb/'), dimensions:768, indexableFields:['posts.content'] })
+    semanticSearchPlugin({enabled:true, vectorDB: await LanceDB.create('./db/lancedb/'), dimensions:768, indexableFields:['posts.content'] }),
+    chatPlugin({enabled:true })
   ],
   secret: process.env.PAYLOAD_SECRET ??'secret',
   sharp,

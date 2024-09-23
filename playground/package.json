@@ -18,6 +18,7 @@
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start"
   },
   "dependencies": {
+    "@payload-llm-plugins/chat": "workspace:*",
     "@payload-llm-plugins/semantic-search": "workspace:*",
     "@payloadcms/live-preview-react": "beta",
     "@payloadcms/next": "beta",
