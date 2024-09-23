@@ -195,6 +195,7 @@ export default buildConfig({
     chatPlugin({enabled:true })
   ],
   secret: process.env.PAYLOAD_SECRET ??'secret',
+  //@ts-ignore
   sharp,
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),

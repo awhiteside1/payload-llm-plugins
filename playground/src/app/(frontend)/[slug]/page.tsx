@@ -4,6 +4,7 @@ import { PayloadRedirects } from '../../../components/PayloadRedirects'
 import configPromise from '@payload-config'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
 import { draftMode } from 'next/headers'
+// @ts-ignore
 import React, { cache } from 'react'
 import { homeStatic } from '../../../endpoints/seed/home-static'
 
