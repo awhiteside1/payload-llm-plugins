@@ -36,21 +36,19 @@ export const chatPlugin =
 				components: {
 					views: {
 						chat: {
-							exact:true,
-							sensitive:false,
-							path:'/chat',
+							exact: false,
+							sensitive: false,
+							path:  '/chat/:chat_id',
 							Component: '@payload-llm-plugins/chat/ChatView',
 						},
 					},
 				},
 			},
 			collections: [
-				createMessageCollection(
-					pluginConfig.generatedCollections.chats,
-				),
+				createMessageCollection(pluginConfig.generatedCollections.chats),
 			],
 		} satisfies Partial<Config>)
-		console.log(updatedConfig.admin.components.views.chat)
+
 		const clientConfig = pluginConfig.modelClientConfig
 
 		// @ts-ignore

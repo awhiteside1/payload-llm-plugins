@@ -26,6 +26,7 @@
 		"build:ui": "vite build",
 		"build:plugin": "unbuild --sourcemaps",
 		"build": "pnpm build:plugin && pnpm build:ui",
+		"generate": "payload generate:types",
 		"tailwind": "npx tailwindcss -i ./src/ui/tailwind.css -o ./dist/ui/tailwind.css"
 	},
 	"dependencies": {

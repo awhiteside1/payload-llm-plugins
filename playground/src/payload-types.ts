@@ -586,22 +586,15 @@ export interface FormSubmission {
  */
 export interface Chat {
   id: number;
-  messages?:
-    | {
-        sent: string;
-        text: string;
-        role: 'assistant' | 'user';
-        context?: {
-          collection?: string | null;
-          view?: ('list' | 'record') | null;
-        };
-        id?: string | null;
-      }[]
-    | null;
-  user: {
-    relationTo: 'users';
-    value: number | User;
-  };
+  messages: {
+    sent?: string | null;
+    role: 'assistant' | 'user';
+    text: string;
+    collection?: string | null;
+    view?: ('list' | 'record') | null;
+    id?: string | null;
+  }[];
+  user: number | User;
   description?: string | null;
   updatedAt: string;
   createdAt: string;

@@ -47,6 +47,7 @@ const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
 }
 
 export default buildConfig({
+  i18n:{fallbackLanguage:'en'},
   admin: {
     components: {
       // The `BeforeLogin` component renders a message that you see while logging into your admin panel.

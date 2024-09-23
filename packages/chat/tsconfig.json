@@ -3,7 +3,8 @@
 	"files": [],
 	"compilerOptions": {
 		"jsx": "react-jsx",
-		"target": "ES2022"
+		"target": "ES2022",
+		"paths": { "@payload-config": ["./src/payload.config.ts"] }
 	},
 	"references": [
 		{ "path": "./tsconfig.lib.json" },
