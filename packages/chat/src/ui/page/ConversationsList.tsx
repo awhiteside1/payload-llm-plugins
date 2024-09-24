@@ -1,32 +1,35 @@
-import * as React from 'react'
-import {use} from 'react'
-import {get} from 'radash'
-import type {PayloadRequest} from 'payload'
-import {queryChats} from '../hooks/queryConversations'
+import * as React from "react";
+import { Suspense, use } from "react";
+import type { AdminViewProps, PayloadRequest } from "payload";
+import { queryChats } from "../hooks/queryConversations";
+import { ChatHistory, Page } from "@payload-llm-plugins/chat-ui";
+import { getChatIdFromParams } from "../../payload/getChatIdFromParams";
+import { shake } from "radash";
 
 interface ConversationsListProps {
-	req: PayloadRequest
-	chatId: undefined | string | number
+  req: PayloadRequest;
+  chatId?: string;
 }
 
-export const ConversationsList = ({ req, chatId }: ConversationsListProps) => {
-	const conversations = queryChats(req)
+const UnsafeConvoList = ({ req, chatId }: ConversationsListProps) => {
+  const conversations = queryChats(req);
 
-	const convos = use(conversations)
-	return (
-		<div className="conversations-list space-y-2">
-			{convos?.map((convo) => (
-				<a
-					key={get(convo, 'id')}
-					href={`./${get(convo, 'id')}`}
-					data-selected={String(get(convo, 'id')) === String(chatId)}
-					className="block p-2 bg-white rounded shadow hover:bg-gray-200 "
-				>
-					<div className="conversation">
-						<p className="text-gray-800">{convo.description}</p>
-					</div>
-				</a>
-			))}
-		</div>
-	)
-}
+  const convos = use(conversations);
+  return <ChatHistory convos={convos.transform(chatId)} />;
+};
+
+export const ConversationsList = ({
+  initPageResult,
+  params,
+}: Pick<AdminViewProps, "params" | "initPageResult">) => {
+  const chatId = getChatIdFromParams(params);
+  console.table({ chatId });
+  const rest = shake({ chatId });
+  return (
+    <Page title="Chat History">
+      <Suspense fallback={<p>Loading</p>}>
+        <UnsafeConvoList req={initPageResult.req} {...rest} />
+      </Suspense>
+    </Page>
+  );
+};

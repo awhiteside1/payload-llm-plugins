@@ -57,10 +57,17 @@ export default buildConfig({
       // The `BeforeDashboard` component renders the 'welcome' block that you see after logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below and the import `BeforeDashboard` statement on line 15.
       beforeDashboard: ['@/components/BeforeDashboard'],
+      afterNavLinks:['@/components/AfterNavLinks'],
       views: {
-        ui: {
+        chat: {
           Component: '@/components/Char',
-          path: '/ui/:id',
+          path: '/chat/:id',
+          exact: false,
+          strict:false
+        },
+        history: {
+          Component: '@/components/Char/History',
+          path: '/history',
           exact: false,
           strict:false
         },

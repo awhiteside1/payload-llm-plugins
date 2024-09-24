@@ -16,10 +16,12 @@ import { PreviewComponent as PreviewComponent_14 } from '@payloadcms/plugin-seo/
 import { SlugComponent as SlugComponent_15 } from '@/fields/slug/SlugComponent'
 import { HorizontalRuleFeatureClient as HorizontalRuleFeatureClient_16 } from '@payloadcms/richtext-lexical/client'
 import { BlocksFeatureClient as BlocksFeatureClient_17 } from '@payloadcms/richtext-lexical/client'
-import { default as default_18 } from '@/components/BeforeDashboard'
-import { default as default_19 } from '@/components/BeforeLogin'
-import { Provider as Provider_20 } from '@payload-llm-plugins/chat-ui'
-import { default as default_21 } from '@/components/Char'
+import { default as default_18 } from '@/components/AfterNavLinks'
+import { default as default_19 } from '@/components/BeforeDashboard'
+import { default as default_20 } from '@/components/BeforeLogin'
+import { Provider as Provider_21 } from '@payload-llm-plugins/chat-ui'
+import { default as default_22 } from '@/components/Char'
+import { default as default_23 } from '@/components/Char/History'
 
 export const importMap = {
   "@payloadcms/richtext-lexical/client#RichTextCell": RichTextCell_0,
@@ -40,8 +42,10 @@ export const importMap = {
   "@/fields/slug/SlugComponent#SlugComponent": SlugComponent_15,
   "@payloadcms/richtext-lexical/client#HorizontalRuleFeatureClient": HorizontalRuleFeatureClient_16,
   "@payloadcms/richtext-lexical/client#BlocksFeatureClient": BlocksFeatureClient_17,
-  "@/components/BeforeDashboard#default": default_18,
-  "@/components/BeforeLogin#default": default_19,
-  "@payload-llm-plugins/chat-ui#Provider": Provider_20,
-  "@/components/Char#default": default_21
+  "@/components/AfterNavLinks#default": default_18,
+  "@/components/BeforeDashboard#default": default_19,
+  "@/components/BeforeLogin#default": default_20,
+  "@payload-llm-plugins/chat-ui#Provider": Provider_21,
+  "@/components/Char#default": default_22,
+  "@/components/Char/History#default": default_23
 }
