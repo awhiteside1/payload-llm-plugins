@@ -1,49 +1,73 @@
 {
-	"name": "@payload-llm-plugins/chat-ui",
-	"type": "module",
-	"types": "./dist/index.d.ts",
-	"module": "./dist/index.mjs",
-	"sources": "src/index.ts",
-	"files": ["dist/", "*.css"],
-	"exports": {
-		"./ChatView": {
-			"types": "./src/ui/page/ChatView.ts",
-			"import": "./dist/ui/page/ChatView.js",
-			"default": "./dist/ui/page/ChatView.cjs"
-		},
-		".": {
-			"types": "./dist/index.d.ts",
-			"import": "./dist/index.mjs",
-			"default": "./dist/index.cjs"
-		}
-	},
-	"scripts": {
-		"test": "vitest --run",
-		"bench": "vitest --run bench",
-		"build:ui": "vite build",
-		"build:plugin": "unbuild --sourcemaps",
-		"build": "pnpm build:plugin && pnpm build:ui",
-		"generate": "payload generate:types"
-	},
-	"dependencies": {
-		"defu": "^6.1.4",
-		"radash": "^12.1.0"
-	},
-	"peerDependencies": {
-		"react": "^18.3.1",
-		"react-dom": "^18.3.1"
-	},
-	"devDependencies": {
-		"tsup": "^8.3.0",
-		"@types/react": "18.3.8",
-		"@types/react-dom": "^18.3.0",
-		"vite-plugin-lib-inject-css": "^2.1.1",
-		"type-fest": "^4.26.1",
-		"@vitejs/plugin-react": "^4.3.1",
-		"vite": "^5.4.7",
-		"vitest": "^2.1.1",
-		"reshaped": "^3.2.0-canary.5",
-		"postcss": "^8.4.47",
-		"vite-plugin-externalize-deps": "^0.8.0"
-	}
+  "name": "@payload-llm-plugins/chat-ui",
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "module": "./dist/index.mjs",
+  "sources": "src/index.ts",
+  "files": [
+    "dist/",
+    "*.css"
+  ],
+  "exports": {
+    "./ChatView": {
+      "types": "./src/ui/page/ChatView.ts",
+      "import": "./dist/ui/page/ChatView.js",
+      "default": "./dist/ui/page/ChatView.cjs"
+    },
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "default": "./dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "test": "vitest --run",
+    "bench": "vitest --run bench",
+    "build:ui": "vite build",
+    "build:plugin": "unbuild --sourcemaps",
+    "build": "pnpm build:plugin && pnpm build:ui",
+    "generate": "payload generate:types",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "dependencies": {
+    "@heroicons/react": "^2.1.5",
+    "chancejs": "^0.0.8",
+    "defu": "^6.1.4",
+    "feather-icons": "^4.29.2",
+    "radash": "^12.1.0",
+    "reshaped": "^3.2.0-canary.6",
+    "ts-pattern": "^5.3.1"
+  },
+  "peerDependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "^1.9.0",
+    "@storybook/addon-essentials": "^8.3.2",
+    "@storybook/addon-interactions": "^8.3.2",
+    "@storybook/addon-links": "^8.3.2",
+    "@storybook/addon-onboarding": "^8.3.2",
+    "@storybook/blocks": "^8.3.2",
+    "@storybook/react": "^8.3.2",
+    "@storybook/react-vite": "^8.3.2",
+    "@storybook/test": "^8.3.2",
+    "@types/chance": "^1.1.6",
+    "@types/feather-icons": "^4.29.4",
+    "@types/react": "18.3.8",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "chance": "^1.1.12",
+    "postcss": "^8.4.47",
+    "prop-types": "^15.8.1",
+    "reshaped": "^3.2.0-canary.5",
+    "storybook": "^8.3.2",
+    "tsup": "^8.3.0",
+    "type-fest": "^4.26.1",
+    "vite": "^5.4.7",
+    "vite-plugin-externalize-deps": "^0.8.0",
+    "vite-plugin-lib-inject-css": "^2.1.1",
+    "vitest": "^2.1.1"
+  }
 }

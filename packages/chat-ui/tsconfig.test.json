@@ -5,6 +5,6 @@
 		"target": "ESNext",
 		"types": ["vitest/globals"]
 	},
-	"include": ["**/*.spec.ts", "**/*.bench.ts", "vite.config.ts", "e2e","build.config.ts","build.preset.ts"],
+	"include": ["**/*.spec.ts", "**/*.bench.ts", "vite.config.ts", "e2e","build.config.ts","build.preset.ts", ".storybook/*.ts"],
 	"exclude": ["./dist/**"]
 }

@@ -133,3 +133,4 @@ dist
 **/dist/
 dist/
 .idea/
+*storybook.log
