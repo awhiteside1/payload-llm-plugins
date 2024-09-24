@@ -1,11 +1,11 @@
 // storage-adapter-import-placeholder
-import {sqliteAdapter} from '@payloadcms/db-sqlite'
-import {semanticSearchPlugin} from '@payload-llm-plugins/semantic-search'
-import {payloadCloudPlugin} from '@payloadcms/plugin-cloud'
-import {formBuilderPlugin} from '@payloadcms/plugin-form-builder'
-import {nestedDocsPlugin} from '@payloadcms/plugin-nested-docs'
-import {redirectsPlugin} from '@payloadcms/plugin-redirects'
-import {seoPlugin} from '@payloadcms/plugin-seo'
+import { sqliteAdapter } from '@payloadcms/db-sqlite'
+import { semanticSearchPlugin } from '@payload-llm-plugins/semantic-search'
+import { payloadCloudPlugin } from '@payloadcms/plugin-cloud'
+import { formBuilderPlugin } from '@payloadcms/plugin-form-builder'
+import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
+import { redirectsPlugin } from '@payloadcms/plugin-redirects'
+import { seoPlugin } from '@payloadcms/plugin-seo'
 import {
   BoldFeature,
   FixedToolbarFeature,
@@ -17,21 +17,21 @@ import {
 } from '@payloadcms/richtext-lexical'
 import sharp from 'sharp' // editor-import
 import path from 'path'
-import {buildConfig} from 'payload'
-import {fileURLToPath} from 'url'
+import { buildConfig } from 'payload'
+import { fileURLToPath } from 'url'
 import Categories from './collections/Categories'
-import {Media} from './collections/Media'
-import {Pages} from './collections/Pages'
-import {Posts} from './collections/Posts'
+import { Media } from './collections/Media'
+import { Pages } from './collections/Pages'
+import { Posts } from './collections/Posts'
 import Users from './collections/Users'
-import {seedHandler} from './endpoints/seedHandler'
-import {Footer} from './Footer/config'
-import {Header} from './Header/config'
-import {revalidateRedirects} from './hooks/revalidateRedirects'
-import {GenerateTitle, GenerateURL} from '@payloadcms/plugin-seo/types'
-import {Page, Post} from './payload-types'
-import {LanceDB} from "@payload-llm-plugins/semantic-search/lancedb";
-import {chatPlugin} from "@payload-llm-plugins/chat";
+import { seedHandler } from './endpoints/seedHandler'
+import { Footer } from './Footer/config'
+import { Header } from './Header/config'
+import { revalidateRedirects } from './hooks/revalidateRedirects'
+import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
+import { Page, Post } from './payload-types'
+import { LanceDB } from '@payload-llm-plugins/semantic-search/lancedb'
+import { chatPlugin } from '@payload-llm-plugins/chat'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -47,15 +47,24 @@ const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
 }
 
 export default buildConfig({
-  i18n:{fallbackLanguage:'en'},
+  i18n: { fallbackLanguage: 'en' },
   admin: {
     components: {
+      providers:['@payload-llm-plugins/chat-ui#Provider'],
       // The `BeforeLogin` component renders a message that you see while logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below and the import `BeforeLogin` statement on line 15.
       beforeLogin: ['@/components/BeforeLogin'],
       // The `BeforeDashboard` component renders the 'welcome' block that you see after logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below and the import `BeforeDashboard` statement on line 15.
       beforeDashboard: ['@/components/BeforeDashboard'],
+      views: {
+        ui: {
+          Component: '@/components/Char',
+          path: '/ui/:id',
+          exact: false,
+          strict:false
+        },
+      },
     },
     importMap: {
       baseDir: path.resolve(dirname),
@@ -191,10 +200,15 @@ export default buildConfig({
       },
     }),
     payloadCloudPlugin(), // storage-adapter-placeholder
-    semanticSearchPlugin({enabled:true, vectorDB: await LanceDB.create('./db/lancedb/'), dimensions:768, indexableFields:['posts.content'] }),
-    chatPlugin({enabled:true })
+    semanticSearchPlugin({
+      enabled: true,
+      vectorDB: await LanceDB.create('./db/lancedb/'),
+      dimensions: 768,
+      indexableFields: ['posts.content'],
+    }),
+    chatPlugin({ enabled: true }),
   ],
-  secret: process.env.PAYLOAD_SECRET ??'secret',
+  secret: process.env.PAYLOAD_SECRET ?? 'secret',
   //@ts-ignore
   sharp,
   typescript: {

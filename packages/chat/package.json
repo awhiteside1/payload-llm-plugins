@@ -10,7 +10,7 @@
 	],
 	"exports": {
 		"./ChatView": {
-			"types": "./src/ui/page/ChatView.ts",
+			"types": "./dist/types/ui/page/ChatView.d.ts",
 			"import": "./dist/ui/page/ChatView.js",
 			"default": "./dist/ui/page/ChatView.cjs"
 		},
@@ -30,8 +30,7 @@
 		"tailwind": "npx tailwindcss -i ./src/ui/tailwind.css -o ./dist/ui/tailwind.css"
 	},
 	"dependencies": {
-		"@payloadcms/next": "beta",
-		"@payloadcms/ui": "beta",
+		"@payload-llm-plugins/chat-ui": "workspace:*",
 		"@vitejs/plugin-react": "^4.3.1",
 		"@workspace/llm-utils": "workspace:*",
 		"defu": "^6.1.4",
@@ -46,6 +45,8 @@
 		"vite-plugin-node-polyfills": "^0.22.0"
 	},
 	"peerDependencies": {
+		"@payloadcms/next": "beta",
+		"@payloadcms/ui": "beta",
 		"next": "^14.2.13",
 		"payload": "beta",
 		"react": "^18.3.1"

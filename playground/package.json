@@ -18,6 +18,7 @@
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start"
   },
   "dependencies": {
+    "@payload-llm-plugins/chat-ui": "workspace:*",
     "@payload-llm-plugins/chat": "workspace:*",
     "@payload-llm-plugins/semantic-search": "workspace:*",
     "@payloadcms/live-preview-react": "beta",
@@ -42,7 +43,7 @@
     "jsonwebtoken": "9.0.2",
     "lexical": "0.17.0",
     "lucide-react": "^0.378.0",
-    "next": "15.0.0-canary.104",
+    "next": "15.0.0-canary.165",
     "payload": "beta",
     "payload-admin-bar": "^1.0.6",
     "prism-react-renderer": "^2.3.1",

@@ -1,3 +1,4 @@
+'use client'
 import { Card, Icon, Text, View } from "reshaped";
 import React, { PropsWithChildren, ReactElement, ReactNode } from "react";
 

@@ -18,7 +18,7 @@ export const ConversationsList = ({ req, chatId }: ConversationsListProps) => {
 			{convos?.map((convo) => (
 				<a
 					key={get(convo, 'id')}
-					href={`/admin/chat/${get(convo, 'id')}`}
+					href={`./${get(convo, 'id')}`}
 					data-selected={String(get(convo, 'id')) === String(chatId)}
 					className="block p-2 bg-white rounded shadow hover:bg-gray-200 "
 				>

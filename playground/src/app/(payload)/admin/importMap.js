@@ -18,7 +18,8 @@ import { HorizontalRuleFeatureClient as HorizontalRuleFeatureClient_16 } from '@
 import { BlocksFeatureClient as BlocksFeatureClient_17 } from '@payloadcms/richtext-lexical/client'
 import { default as default_18 } from '@/components/BeforeDashboard'
 import { default as default_19 } from '@/components/BeforeLogin'
-import { default as default_20 } from '@payload-llm-plugins/chat/ChatView'
+import { Provider as Provider_20 } from '@payload-llm-plugins/chat-ui'
+import { default as default_21 } from '@/components/Char'
 
 export const importMap = {
   "@payloadcms/richtext-lexical/client#RichTextCell": RichTextCell_0,
@@ -41,5 +42,6 @@ export const importMap = {
   "@payloadcms/richtext-lexical/client#BlocksFeatureClient": BlocksFeatureClient_17,
   "@/components/BeforeDashboard#default": default_18,
   "@/components/BeforeLogin#default": default_19,
-  "@payload-llm-plugins/chat/ChatView#default": default_20
+  "@payload-llm-plugins/chat-ui#Provider": Provider_20,
+  "@/components/Char#default": default_21
 }

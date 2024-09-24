@@ -35,12 +35,12 @@ export const chatPlugin =
 			admin: {
 				components: {
 					views: {
-						chat: {
-							exact: false,
-							sensitive: false,
-							path:  '/chat/:chat_id',
-							Component: '@payload-llm-plugins/chat/ChatView',
-						},
+						// chat: {
+						// 	exact: false,
+						// 	sensitive: false,
+						// 	path:  '/chat/:chat_id',
+						// 	Component: '@payload-llm-plugins/chat/ChatView#ChatView',
+						// },
 					},
 				},
 			},
