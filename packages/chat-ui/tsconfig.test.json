@@ -1,0 +1,10 @@
+{
+	"extends": ["./tsconfig.json"],
+	"compilerOptions": {
+		"noEmit": true,
+		"target": "ESNext",
+		"types": ["vitest/globals"]
+	},
+	"include": ["**/*.spec.ts", "**/*.bench.ts", "vite.config.ts", "e2e","build.config.ts","build.preset.ts"],
+	"exclude": ["./dist/**"]
+}

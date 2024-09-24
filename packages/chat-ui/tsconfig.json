@@ -1,0 +1,12 @@
+{
+	"extends": "../../tsconfig.base.json",
+	"files": [],
+	"compilerOptions": {
+		"jsx": "react-jsx",
+		"target": "ES2022"
+	},
+	"references": [
+		{ "path": "./tsconfig.lib.json" },
+		{ "path": "./tsconfig.test.json" }
+	]
+}

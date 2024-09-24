@@ -30,7 +30,6 @@ const ChatView: React.FC<AdminViewProps> = ({
 	}
 
 	const chatId = get(params,'segments[1]', undefined)
-	console.log(chatId)
 
 
 	return (
