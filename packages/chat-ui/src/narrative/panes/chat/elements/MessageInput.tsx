@@ -1,7 +1,6 @@
 "use client";
 
 import { Button, TextArea, TextField, View } from "reshaped";
-import { FormEventHandler } from "react";
 
 
 export const MessageInput = () => {

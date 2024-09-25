@@ -6,7 +6,7 @@ import { Message } from "./Message";
 import Chance from "chance";
 import feather from "feather-icons";
 
-const givenASpeaker = (role: Role = "user"): Speaker => {
+export const givenASpeaker = (role: Role = "user"): Speaker => {
   const initials = match(role)
     .with("user", () => "AW")
     .with("assistant", () => "GPT")

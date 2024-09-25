@@ -16,3 +16,4 @@ export const MessageList = ({ children }: PropsWithChildren) => {
     </View>
   );
 };
+

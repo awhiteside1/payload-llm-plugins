@@ -1,0 +1,16 @@
+{
+	"extends": "../../tsconfig.base.json",
+	"files": [],
+	"compilerOptions": {
+		"strict": true,
+		"exactOptionalPropertyTypes": true
+	},
+	"references": [
+		{
+			"path": "./tsconfig.lib.json"
+		},
+		{
+			"path": "./tsconfig.test.json"
+		}
+	]
+}

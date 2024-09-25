@@ -1,6 +1,6 @@
 import { MessageList } from "./elements/MessageList";
 import { Divider, View } from "reshaped";
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, type JSX } from "react";
 
 interface Props {
   messages: JSX.Element;
