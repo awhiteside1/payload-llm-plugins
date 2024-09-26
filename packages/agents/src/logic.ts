@@ -15,16 +15,14 @@ export class Director implements Agent {
   directives = []
   taskAssigner = new TaskAssigner()
 
-  execute(context: AgentContext): Effect.Effect<AgentContext, Error, AgentContext> {
-    return Effect.gen(function* (this: Director, _) {
+  execute(context: AgentContext) {
+    return Effect.gen(this, function* () {
       const currentTask: Task = context.currentTask
 
       if (!currentTask.assignee) {
-        yield* _(Effect.suspend(() => this.taskAssigner.assignTask(currentTask)))
+        yield* Effect.suspend(() => this.taskAssigner.assignTask(currentTask))
       }
-
-      return context
-    }.bind(this))
+    }
   }
 }
 
