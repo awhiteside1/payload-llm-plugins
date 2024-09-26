@@ -1,12 +1,11 @@
 import { JSONSchema, Schema } from "@effect/schema";
 import { LLMService } from "./services";
-import { Effect, pipe, Either } from "effect";
+import { Effect, Match, pipe } from "effect";
 import { extractJSON, getMdast, stringifyMdast } from "./md";
-import { Match } from "effect";
 import { get, isArray, unique } from "radash";
-import { isSchema, transform } from "@effect/schema/Schema";
+import { isSchema } from "@effect/schema/Schema";
 import { getSectionByHeading } from "./md/getSection";
-import { Root } from "mdast";
+import { isRight } from "effect/Either";
 
 export class Task {
   constructor(
@@ -116,11 +115,17 @@ export abstract class Agent {
       const llm = yield* LLMService;
 
       const taskReal = yield* task;
-      console.log(taskReal);
       const prompt = generatePrompt(taskReal);
-      console.log(prompt);
       const response = yield* llm.generateText(prompt, "mistral-small");
-      return parseTaskResponse(taskReal, response);
+
+      const mdast = yield* getMdast(response);
+      const data = Schema.decodeEither(taskReal.format)(
+        extractJSON(getSectionByHeading(mdast, sections.data.heading)),
+      );
+      if (isRight(data)) {
+        return new TaskResult(data.right, "");
+      }
+      return new TaskResult(null, "null");
     });
   }
 }
@@ -130,27 +135,3 @@ export class HelloAgent extends Agent {
   description = "Welcomes people to the project";
 }
 
-const parseTaskResponse = (task: Task, response: string) => {
-  const root = getMdast(response);
-
-  const getSection = <T extends Effect.Effect<any, Error, never>>(
-    heading: string,
-    transform?: T,
-  ) => {
-    return pipe(
-      Effect.try({
-        try: () => getSectionByHeading(root, heading),
-        catch: (err) => err,
-      }),
-      Effect.map(transform ?? stringifyMdast),
-    );
-  };
-
-  const data = getSection(sections.data.heading, (node) =>
-    Schema.decodeEither(task.format)(extractJSON(node)),
-  );
-
-  if (task.format && data && Either.isLeft(data)) throw new Error("Failed");
-  const unstructured = getSection(sections.unstructured.heading);
-  return new TaskResult(data, unstructured);
-};
