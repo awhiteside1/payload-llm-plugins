@@ -1,7 +1,7 @@
 // services.ts
 
 import { Effect, Context, Layer } from "effect";
-import { Ollama } from "ollama";
+import { ChatRequest, ChatResponse, Message, Ollama } from "ollama";
 
 /**
  * LLMService tag
@@ -9,6 +9,9 @@ import { Ollama } from "ollama";
 export class LLMService extends Context.Tag("LLMService")<
   LLMService,
   {
+    readonly chat: (
+      req: ChatRequest,
+    ) => Effect.Effect<ChatResponse, Error, never>;
     readonly generateText: (
       prompt: string,
       model: string,
@@ -28,6 +31,11 @@ export const LLMServiceLive = () => {
   return Layer.succeed(
     LLMService,
     LLMService.of({
+      chat: (request: ChatRequest) =>
+        Effect.tryPromise({
+          try: () => ollama.chat({ ...request, stream: false }),
+          catch: (err) => new Error('unknown'),
+        }),
       generateText: (prompt: string, model: string) =>
         Effect.tryPromise({
           try: () =>

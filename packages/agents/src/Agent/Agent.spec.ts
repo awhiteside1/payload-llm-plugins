@@ -1,7 +1,8 @@
-import { HelloAgent, Task } from "./Agent";
+import { HelloAgent } from "../agents/HelloAgent";
 import { Effect } from "effect";
 import { Schema } from "@effect/schema";
-import { AppLayer } from "./services";
+import { AppLayer } from "../services";
+import { Task } from "../task";
 
 describe("Agent", () => {
   it("should ", { timeout: 100000 }, async () => {
@@ -18,7 +19,6 @@ describe("Agent", () => {
       return yield* agent.process(createTask);
     });
 
-    // const ollamaLayer = LLMServiceLive();
     const runnable = Effect.provide(program, AppLayer);
 
     const output = await Effect.runPromise(runnable);
