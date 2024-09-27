@@ -7,11 +7,12 @@ import { isRight } from "effect/Either";
 import { Task, TaskResult } from "../task";
 import { Prompts } from "./prompts";
 import { InjectSection } from "./injectSection";
+import { AIFunctionLike, AIFunctionSet } from "@agentic/core";
 
 export abstract class Agent {
   abstract name: string;
   abstract description: string;
-
+  public tools:AIFunctionLike[] = []
   constructor() {}
 
   generatePrompt(task: Task) {
