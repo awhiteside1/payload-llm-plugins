@@ -35,10 +35,20 @@ export const promptContext = [
   toMarkdownTable(Object.values(sections)),
 ];
 
+const tooluse = [
+  "You may be provided tools which you may choose to invoke to complete this task.",
+  "If you choose to invoke a tool, it will be executed and the result appended as a message in the chat history.",
+  "While using appropriate tools and information from their responses to complete the task is encouraged, do not reference your use of the tool in your final response.",
+].join("\n");
+
 export const Prompts = {
-  sectionKeys: mapValues(sections, section=>section.heading),
+  sectionKeys: mapValues(sections, (section) => section.heading),
   responseConventions: InjectSection(
     "Response Conventions",
     promptContext.join("\n"),
+  ),
+  toolUse: InjectSection(
+    "Tools",
+    tooluse
   ),
 };

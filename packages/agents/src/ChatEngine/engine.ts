@@ -1,5 +1,6 @@
 import { ChatResponse, Message, Ollama } from "ollama";
 import { ToolObject } from "./tools";
+import { isArray, last } from "radash";
 
 interface GenerateOptions {
   llm: Ollama;
@@ -9,9 +10,10 @@ interface GenerateOptions {
 }
 
 const isMessageChainComplete = (messages: Array<Message>) => {
-  const lastMessage = messages[-1];
-  const isAssistant = lastMessage.role === "assistant";
-  const hasTools = lastMessage.tool_calls && lastMessage.tool_calls.length > 0;
+  const lastMessage = last(messages);
+  const isAssistant = lastMessage?.role === "assistant";
+  const hasTools =
+    isArray(lastMessage?.tool_calls) && lastMessage.tool_calls.length > 0;
   return isAssistant && !hasTools;
 };
 
@@ -55,8 +57,10 @@ export const generate = async ({
       tools: toolDetails,
       messages,
     });
-
+    messages.push(response.message);
     const toolMessages = await processTools(response);
     messages.push(...toolMessages);
   } while (!isMessageChainComplete(messages));
+
+  return messages;
 };
