@@ -3,8 +3,8 @@ import { Schema } from "@effect/schema";
 export class Task {
   constructor(
     readonly instructions: string,
-    readonly acceptanceCriteria: Array<string> = [],
     readonly format: Schema.Schema.AnyNoContext,
+    readonly acceptanceCriteria: Array<string> = [],
   ) {}
 }
 

@@ -1,12 +1,10 @@
 import { remark } from "remark";
 import remarkGfm from "remark-gfm";
-import { Root } from "mdast";
-import { Effect } from "effect";
+import type { Root } from "mdast";
+
 
 const markdownPipeline = remark().use(remarkGfm);
 
-export const getMdast = (md: string) => {
-  return Effect.succeed(markdownPipeline.parse(md));
-};
+export const getMdast = (md: string) => markdownPipeline.parse(md)
 
-export const stringifyMdast = (node: Root)=> Effect.succeed(markdownPipeline.stringify(node))
+export const stringifyMdast = (node: Root)=> markdownPipeline.stringify(node)

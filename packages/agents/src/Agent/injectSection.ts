@@ -1,4 +1,4 @@
-import { JSONSchema, Schema } from "@effect/schema";
+import { JSONSchema, type Schema } from "@effect/schema";
 import { Match } from "effect";
 import { isArray } from "radash";
 import { isSchema } from "@effect/schema/Schema";

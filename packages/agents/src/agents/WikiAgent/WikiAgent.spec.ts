@@ -1,12 +1,23 @@
-import { LlamaIndexAgent } from "./WikiAgent";
+import { WikiAgent } from './WikiAgent'
+import { Effect } from 'effect'
+import { Task } from '../../task'
+import { Schema } from '@effect/schema'
+import { AppLayer } from '../../services'
 
-describe("LLamaIndex", () => {
-  it("should whatever", {timeout:100000},async() => {
+describe('LLamaIndex', () => {
+	it('should whatever', { timeout: 100000 }, async () => {
+		const agent = new WikiAgent()
 
-    const agent = new LlamaIndexAgent()
+		const program = Effect.gen(function* () {
+			const task = new Task(
+				'Get me background information about  Cantaloupe, the fruit. ',
+				Schema.String,
+			)
+			return yield* agent.process(task)
+		})
+		const runnable = Effect.provide(program, AppLayer)
+		const result = await Effect.runPromise(runnable)
 
-    const result = await agent.process('Get me background information about  Cantaloupe, the fruit. ')
-    expect(result).toBeDefined()
-  });
-
-});
+		expect(result).toBeDefined()
+	})
+})

@@ -9,14 +9,11 @@ describe("Agent", () => {
     const agent = new HelloAgent();
     const program = Effect.gen(function* () {
 
-      const createTask = Effect.succeed(
-        new Task(
+
+      return yield* agent.process(new Task(
           "Create a greeting for Alex Whiteside, a software architect who enjoys sarcasm and XKCD",
-          ["Be Positive", "Be Creative"],
-          Schema.Struct({ greeting: Schema.String }),
-        ),
-      );
-      return yield* agent.process(createTask);
+          Schema.Struct({ greeting: Schema.String }), ["Be Positive", "Be Creative"]
+      ),);
     });
 
     const runnable = Effect.provide(program, AppLayer);
