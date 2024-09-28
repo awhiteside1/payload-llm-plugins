@@ -1,14 +1,14 @@
 import { JSONSchema, Schema } from "@effect/schema";
-import { Message, Ollama, Tool, ToolCall } from "ollama";
+import { type Message, Ollama, type Tool, type ToolCall } from "ollama";
 import { isString } from "radash";
 
 interface ToolOptions<
-  T extends Schema.Schema.AnyNoContext,
-  K extends Schema.Schema.AnyNoContext = typeof Schema.String,
+  T extends Schema.Schema.Any,
+  K extends Schema.Schema.Any = typeof Schema.String,
 > {
   params: T;
   output?: K;
-  implementation: (args: Schema.Schema.Type<T>) => Promise<K>;
+  implementation: (args: Schema.Schema.Type<T>) => Promise<Schema.Schema.Type<K>>;
   name: string;
   description: string;
 }

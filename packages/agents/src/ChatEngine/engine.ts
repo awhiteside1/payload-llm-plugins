@@ -1,5 +1,5 @@
-import { ChatResponse, Message, Ollama } from "ollama";
-import { ToolObject } from "./tools";
+import type { ChatResponse, Message, Ollama } from "ollama";
+import type { ToolObject } from "./tools";
 import { isArray, last } from "radash";
 
 interface GenerateOptions {
