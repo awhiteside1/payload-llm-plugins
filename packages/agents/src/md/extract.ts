@@ -1,4 +1,4 @@
-import { Code, Root } from "mdast";
+import type { Code, Root } from "mdast";
 import { select } from "unist-util-select";
 
 export const extractJSON = (tree: Root) => {

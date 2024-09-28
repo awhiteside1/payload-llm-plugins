@@ -2,10 +2,12 @@ import {config} from 'dotenv'
 import {dirname, resolve} from 'pathe'
 import {fileURLToPath} from 'node:url'
 import {Schema} from '@effect/schema'
-import {createTool} from '../../ChatEngine/tools'
+import {createTool} from '../../ChatEngine/tools/tools'
 import {get} from 'radash'
-import type {PageDetail, Result} from './types'
+import type {Result} from './types'
 import {Effect} from 'effect'
+import defu from 'defu'
+import {parseHtml} from '../../md/fromHtml/utils'
 
 const localEnv = resolve(dirname(fileURLToPath(import.meta.url)), '.env')
 const envVars = config({ path: localEnv, processEnv: {} })
@@ -18,7 +20,6 @@ const schema = Schema.Struct({
 const fetchConfig = {
 	headers: {
 		'api-user-agent': 'Alex Whiteside (https://github.com/awhiteside1)',
-		accept: 'application/json',
 		Authorization: `Bearer ${accessToken}`,
 	},
 }
@@ -27,12 +28,12 @@ const getPageSource = (key: string) =>
 	Effect.tryPromise({
 		try: async () => {
 			const result = await fetch(
-				`https://api.wikimedia.org/core/v1/wikipedia/en/page/${key}`,
+				`https://api.wikimedia.org/core/v1/wikipedia/en/page/${key}/html`,
 				fetchConfig,
 			)
 			if (result.ok) {
-				const details = await result.json()
-				return details as PageDetail
+				const details = await result.text()
+				return parseHtml(details)
 			}
 		},
 		catch: (error) => new Error('Page Not Retrieved'),
@@ -44,7 +45,7 @@ const getWikiSearch = (query: string) => {
 		try: async () => {
 			const result = await fetch(
 				`https://api.wikimedia.org/core/v1/wikipedia/en/search/page?${new URLSearchParams(params).toString()}`,
-				fetchConfig,
+				defu(fetchConfig, { headers: { accept: 'application/json' } }),
 			)
 			const response = await result.json()
 			if (response.pages) {

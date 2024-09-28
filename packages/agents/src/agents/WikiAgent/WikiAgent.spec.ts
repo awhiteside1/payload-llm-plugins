@@ -1,7 +1,6 @@
 import { WikiAgent } from './WikiAgent'
 import { Effect } from 'effect'
 import { Task } from '../../task'
-import { Schema } from '@effect/schema'
 import { AppLayer } from '../../services'
 
 describe('LLamaIndex', () => {
@@ -11,7 +10,6 @@ describe('LLamaIndex', () => {
 		const program = Effect.gen(function* () {
 			const task = new Task(
 				'Get me background information about  Cantaloupe, the fruit. ',
-				Schema.String,
 			)
 			return yield* agent.process(task)
 		})
