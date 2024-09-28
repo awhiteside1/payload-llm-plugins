@@ -9,6 +9,7 @@ import {InjectSection} from "./injectSection";
 import {generate} from "../ChatEngine/engine";
 import type {ToolObject} from "../ChatEngine/tools";
 import {Ollama} from "ollama";
+import {last} from "radash";
 
 export abstract class Agent {
 	abstract name: string
@@ -47,7 +48,7 @@ export abstract class Agent {
 				messageHistory: messages,
 			}))
 
-			const lastMessage = response[-1]
+			const lastMessage = last(response)
 
 			const mdast = getMdast(lastMessage.content)
 			const data = Schema.decodeEither(task.format)(
