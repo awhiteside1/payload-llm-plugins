@@ -2,6 +2,8 @@
 import {Context, Effect, Layer} from 'effect'
 import {type ChatRequest, type ChatResponse, Ollama} from 'ollama'
 import type {SetOptional} from 'type-fest'
+import {consola} from 'consola/basic'
+import type {ConsolaInstance} from 'consola/core'
 
 /**
  * LLMService tag
@@ -10,6 +12,7 @@ export class LLMService extends Context.Tag('LLMService')<
 	LLMService,
 	{
 		readonly preferredModel: string
+		readonly ollama: Ollama
 		readonly chat: (
 			req: ChatRequest,
 		) => Effect.Effect<ChatResponse, Error, never>
@@ -23,16 +26,26 @@ export class LLMService extends Context.Tag('LLMService')<
 	}
 >() {}
 
+export class ConsolaService extends Context.Tag('Logger')<
+	ConsolaService,
+	ConsolaInstance
+>() {}
+export const ConsolaBasic = Layer.succeed(
+	ConsolaService,
+	ConsolaService.of(consola),
+)
+
 /**
  * Layers providing service implementations.
  */
 export const LLMServiceLive = () => {
 	const ollama = new Ollama({ host: 'http://studio.local:11434' })
-	const preferredModel = 'mistral-small'
+	const preferredModel = 'mistral-nemo'
 
 	return Layer.succeed(
 		LLMService,
 		LLMService.of({
+			ollama: ollama,
 			preferredModel,
 			chat: (request: SetOptional<ChatRequest, 'model'>) =>
 				Effect.tryPromise({
@@ -67,4 +80,4 @@ export const LLMServiceLive = () => {
 /**
  * Defines the application layer by composing service layers.
  */
-export const AppLayer = Layer.mergeAll(LLMServiceLive())
+export const AppLayer = Layer.mergeAll(LLMServiceLive(), ConsolaBasic)

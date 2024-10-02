@@ -22,7 +22,9 @@
 		"postinstall": "pnpm build:stub"
 	},
 	"devDependencies": {
+		"@types/hast": "^3.0.4",
 		"@types/mdast": "^4.0.4",
+		"@types/unist": "^3.0.3",
 		"type-fest": "^4.26.1",
 		"vite-tsconfig-paths": "^5.0.1",
 		"vitest": "^2.1.1"
@@ -34,9 +36,11 @@
 		"@effect/platform": "latest",
 		"@effect/platform-node": "latest",
 		"@effect/schema": "^0.74.1",
+		"consola": "^3.2.3",
 		"defu": "^6.1.4",
 		"dotenv": "^16.4.5",
 		"effect": "^3.7.2",
+		"hast-util-truncate": "^2.0.0",
 		"llamaindex": "0.6.9",
 		"mdast-util-heading-range": "^4.0.0",
 		"ollama": "^0.5.9",
@@ -48,9 +52,12 @@
 		"remark": "^15.0.1",
 		"remark-gfm": "^4.0.0",
 		"remark-stringify": "^11.0.0",
+		"remark-unlink": "^5.0.0",
 		"unified": "^11.0.5",
 		"unist-util-find": "^3.0.0",
 		"unist-util-find-all-between": "^2.1.0",
-		"unist-util-select": "^5.1.0"
+		"unist-util-remove": "^4.0.0",
+		"unist-util-select": "^5.1.0",
+		"unist-util-visit-parents": "^6.0.1"
 	}
 }

@@ -2,6 +2,7 @@ import type {ChatResponse, Message} from 'ollama'
 import {isArray, last} from 'radash'
 import type {ToolObject} from '../tools/tools'
 import type {GenerateOptions, GenerationResult} from './types'
+import {consola} from "consola";
 
 const isMessageChainComplete = (messages: Array<Message>) => {
 	const lastMessage = last(messages)
@@ -20,6 +21,7 @@ const createToolCaller = (tools: Array<ToolObject>) => {
 		for (const toolCall of response.message.tool_calls) {
 			const tool = toolsMap.get(toolCall.function.name)
 			if (tool) {
+				consola.debug(`Invoking ${tool?.name} with arguments ${toolCall.function.arguments}`)
 				const toolMessage = tool.invoke(toolCall.function.arguments)
 				invocations.push(toolMessage)
 			} else {
@@ -62,7 +64,10 @@ export const generate = async ({
 	} while (!isMessageChainComplete(messages))
 	const output = messages.at(-1)?.content
 	if (output) {
+		console.debug('Chat generation completed')
 		return { conversation: messages, output: output }
 	}
+	console.error('Chat generation failure', messages)
+
 	throw new Error('Error')
 }

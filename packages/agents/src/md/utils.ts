@@ -1,6 +1,6 @@
 import { get, unique } from "radash";
 
-export const toMarkdownTable = <T extends Record<string, any>>(
+export const toMarkdownTable = <T extends Record<string, unknown>>(
   data: Array<T>
 ) => {
   const keys = unique(data.flatMap((item) => Object.keys(item)));

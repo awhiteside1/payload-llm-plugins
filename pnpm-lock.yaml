@@ -62,6 +62,9 @@ importers:
       '@effect/schema':
         specifier: ^0.74.1
         version: 0.74.1(effect@3.8.4)
+      consola:
+        specifier: ^3.2.3
+        version: 3.2.3
       defu:
         specifier: ^6.1.4
         version: 6.1.4
@@ -71,6 +74,9 @@ importers:
       effect:
         specifier: ^3.7.2
         version: 3.8.4
+      hast-util-truncate:
+        specifier: ^2.0.0
+        version: 2.0.0
       llamaindex:
         specifier: 0.6.9
         version: 0.6.9(@aws-sdk/client-sso-oidc@3.658.1(@aws-sdk/client-sts@3.658.1))(@aws-sdk/credential-providers@3.651.1(@aws-sdk/client-sso-oidc@3.658.1(@aws-sdk/client-sts@3.658.1)))(@notionhq/client@2.2.15(encoding@0.1.13))(encoding@0.1.13)(socks@2.8.3)(typescript@5.6.2)
@@ -104,6 +110,9 @@ importers:
       remark-stringify:
         specifier: ^11.0.0
         version: 11.0.0
+      remark-unlink:
+        specifier: ^5.0.0
+        version: 5.0.0
       unified:
         specifier: ^11.0.5
         version: 11.0.5
@@ -113,13 +122,25 @@ importers:
       unist-util-find-all-between:
         specifier: ^2.1.0
         version: 2.1.0
+      unist-util-remove:
+        specifier: ^4.0.0
+        version: 4.0.0
       unist-util-select:
         specifier: ^5.1.0
         version: 5.1.0
+      unist-util-visit-parents:
+        specifier: ^6.0.1
+        version: 6.0.1
     devDependencies:
+      '@types/hast':
+        specifier: ^3.0.4
+        version: 3.0.4
       '@types/mdast':
         specifier: ^4.0.4
         version: 4.0.4
+      '@types/unist':
+        specifier: ^3.0.3
+        version: 3.0.3
       type-fest:
         specifier: ^4.26.1
         version: 4.26.1
@@ -6301,6 +6322,9 @@ packages:
   hast-util-to-text@4.0.2:
     resolution: {integrity: sha512-KK6y/BN8lbaq654j7JgBydev7wuNMcID54lkRav1P0CaE1e47P72AWWPiGKXTJU271ooYzcvTAn/Zt0REnvc7A==}
 
+  hast-util-truncate@2.0.0:
+    resolution: {integrity: sha512-QjtUhkt0hT75dHwwTYS+E9Rge12IVClGUErJgss7q7EewBuSr6LoGjq7nPp3R6BThqWJ6CbarPVPCbklwnUf/g==}
+
   hast-util-whitespace@3.0.0:
     resolution: {integrity: sha512-88JUN06ipLwsnv+dVn+OIYOvAuvBMy/Qoi6O7mQHxdPXpjy+Cd6xRkWwux7DKO+4sYILtLBRIKgsdpS2gQc7qw==}
 
@@ -7099,6 +7123,9 @@ packages:
 
   md5@2.3.0:
     resolution: {integrity: sha512-T1GITYmFaKuO91vxyoQMFETst+O71VUPEU3ze5GNzDm0OWdP8v1ziTaAEPUr/3kLsY3Sftgz242A1SetQiDL7g==}
+
+  mdast-squeeze-paragraphs@6.0.0:
+    resolution: {integrity: sha512-6NDbJPTg0M0Ye+TlYwX1KJ1LFbp515P2immRJyJQhc9Na9cetHzSoHNYIQcXpANEAP1sm9yd/CTZU2uHqR5A+w==}
 
   mdast-util-find-and-replace@3.0.1:
     resolution: {integrity: sha512-SG21kZHGC3XRTSUhtofZkBzZTJNM5ecCi0SK2IMKmSXR8vO3peL+kb1O0z7Zl83jKtutG4k5Wv/W7V3/YHvzPA==}
@@ -8629,6 +8656,9 @@ packages:
   remark-stringify@11.0.0:
     resolution: {integrity: sha512-1OSmLd3awB/t8qdoEOMazZkNsfVTeY4fTsgzcQFdXNq8ToTN4ZGwrMnlda4K6smTFKD+GRV6O48i6Z4iKgPPpw==}
 
+  remark-unlink@5.0.0:
+    resolution: {integrity: sha512-8NFrI3SecxhOLb734tKaxcU//lNDABabz1I26MGjdlpkUg1I+Fr7lyqL9ckxaCB4kErXD10mScPD7yhCXX4Pfw==}
+
   remark@15.0.1:
     resolution: {integrity: sha512-Eht5w30ruCXgFmxVUSlNWQ9iiimq07URKeFS3hNc8cUWy1llX4KDWfyEDZRycMc+znsN9Ux5/tJ/BFdgdOwA3A==}
 
@@ -9555,6 +9585,9 @@ packages:
 
   unist-util-position@5.0.0:
     resolution: {integrity: sha512-fucsC7HjXvkB5R3kTCO7kUjRdrS0BJt3M/FPxmHMBOm8JQi2BsHAHFsy27E0EolP8rp0NzXsJ+jNPyDWvOJZPA==}
+
+  unist-util-remove@4.0.0:
+    resolution: {integrity: sha512-b4gokeGId57UVRX/eVKej5gXqGlc9+trkORhFJpu9raqZkZhU0zm8Doi05+HaiBsMEIJowL+2WtQ5ItjsngPXg==}
 
   unist-util-select@5.1.0:
     resolution: {integrity: sha512-4A5mfokSHG/rNQ4g7gSbdEs+H586xyd24sdJqF1IWamqrLHvYb+DH48fzxowyOhOfK7YSqX+XlCojAyuuyyT2A==}
@@ -17999,6 +18032,12 @@ snapshots:
       hast-util-is-element: 3.0.0
       unist-util-find-after: 5.0.0
 
+  hast-util-truncate@2.0.0:
+    dependencies:
+      '@types/hast': 3.0.4
+      '@ungap/structured-clone': 1.2.0
+      micromark-util-character: 2.1.0
+
   hast-util-whitespace@3.0.0:
     dependencies:
       '@types/hast': 3.0.4
@@ -18826,6 +18865,11 @@ snapshots:
       charenc: 0.0.2
       crypt: 0.0.2
       is-buffer: 1.1.6
+
+  mdast-squeeze-paragraphs@6.0.0:
+    dependencies:
+      '@types/mdast': 4.0.4
+      unist-util-visit: 5.0.0
 
   mdast-util-find-and-replace@3.0.1:
     dependencies:
@@ -20830,6 +20874,12 @@ snapshots:
       mdast-util-to-markdown: 2.1.0
       unified: 11.0.5
 
+  remark-unlink@5.0.0:
+    dependencies:
+      '@types/mdast': 4.0.4
+      mdast-squeeze-paragraphs: 6.0.0
+      unist-util-visit: 5.0.0
+
   remark@15.0.1:
     dependencies:
       '@types/mdast': 4.0.4
@@ -21928,6 +21978,12 @@ snapshots:
   unist-util-position@5.0.0:
     dependencies:
       '@types/unist': 3.0.3
+
+  unist-util-remove@4.0.0:
+    dependencies:
+      '@types/unist': 3.0.3
+      unist-util-is: 6.0.0
+      unist-util-visit-parents: 6.0.1
 
   unist-util-select@5.1.0:
     dependencies:

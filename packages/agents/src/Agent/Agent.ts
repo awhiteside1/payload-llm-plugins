@@ -2,9 +2,9 @@ import {Effect} from 'effect'
 import type {Task} from '../task'
 import {generate} from '../ChatEngine/generate'
 import type {ToolObject} from '../ChatEngine/tools/tools'
-import {Ollama} from 'ollama'
 import {buildSystemPromptFor} from '../ChatEngine/generate/prompts'
 import {Formatter} from '../ChatEngine/format'
+import {ConsolaService, LLMService} from '../services'
 
 export abstract class Agent {
 	abstract name: string
@@ -20,18 +20,24 @@ export abstract class Agent {
 
 	process(task: Task) {
 		return Effect.gen(this, function* () {
-			const llm = new Ollama({ host: 'http://studio.local:11434' })
+			const consola = yield* ConsolaService
+			consola.start(`Invoking ${this.name} Agent`)
+			const llm = yield* LLMService
 			const response = yield* Effect.promise(() =>
 				generate({
-					llm,
+					model: 'mistral-nemo',
+					llm: llm.ollama,
 					tools: this.tools,
-					model: 'mistral-small',
 					message: task.describe(),
 					systemMessage: buildSystemPromptFor(this),
 				}),
 			)
-
+			consola.success(`${this.name} Chat Generation completed`)
+			console.table(JSON.stringify(response))
+			consola.start(`${this.name} Formatter Running`)
 			const taskResult = yield* Formatter({ task, result: response })
+			consola.success(`${this.name} Formatting  completed`)
+
 			console.log(taskResult)
 			return taskResult
 		})

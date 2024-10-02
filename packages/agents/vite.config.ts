@@ -1,16 +1,14 @@
-
-import { defineConfig } from "vitest/config";
-import tsconfigPaths from "vite-tsconfig-paths";
+import {defineConfig} from 'vitest/config'
+import tsconfigPaths from 'vite-tsconfig-paths'
 
 export default defineConfig({
-  plugins: [tsconfigPaths()],
-  build:{
-    sourcemap:'inline'
+	plugins: [tsconfigPaths()],
+	build: {
+		sourcemap: 'inline',
+	},
 
-  },
-
-  test: {
-
-    globals: true,
-  },
-});
+	test: {
+		disableConsoleIntercept: true,
+		globals: true,
+	},
+})

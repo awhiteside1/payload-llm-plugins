@@ -1,26 +1,28 @@
-import { HelloAgent } from "../agents/HelloAgent";
-import { Effect } from "effect";
-import { Schema } from "@effect/schema";
-import { AppLayer } from "../services";
-import { Task } from "../task";
+import {HelloAgent} from '../agents/HelloAgent'
+import {Effect} from 'effect'
+import {Schema} from '@effect/schema'
+import {AppLayer} from '../services'
+import {Task} from '../task'
 
-describe("Agent", () => {
-  it("should ", { timeout: 100000 }, async () => {
-    const agent = new HelloAgent();
-    const program = Effect.gen(function* () {
+describe('Agent', () => {
+	it('should ', { timeout: 100000 }, async () => {
+		const program = Effect.gen(function* () {
+			const agent = new HelloAgent()
+			const result = yield* agent.process(
+				new Task(
+					'Create a greeting for Alex Whiteside, a software architect who enjoys sarcasm and XKCD',
+					['Be Positive', 'Be Creative'],
+					Schema.Struct({ greeting: Schema.String }),
+				),
+			)
+			return result
+		})
 
+		const runnable = Effect.provide(program, AppLayer)
 
-      return yield* agent.process(new Task(
-          "Create a greeting for Alex Whiteside, a software architect who enjoys sarcasm and XKCD",
-          Schema.Struct({ greeting: Schema.String }), ["Be Positive", "Be Creative"]
-      ),);
-    });
-
-    const runnable = Effect.provide(program, AppLayer);
-
-    const output = await Effect.runPromise(runnable);
-    expect(output.data).toMatchObject(
-      expect.objectContaining({ greeting: expect.stringContaining("Alex") }),
-    );
-  });
-});
+		const output = await Effect.runPromise(runnable)
+		expect(output.structured).toMatchObject(
+			expect.objectContaining({ greeting: expect.stringContaining('Alex') }),
+		)
+	})
+})

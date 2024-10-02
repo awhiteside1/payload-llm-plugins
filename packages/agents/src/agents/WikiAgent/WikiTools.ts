@@ -64,13 +64,15 @@ const searchWikipedia = async (args: Schema.Schema.Type<typeof schema>) => {
 		const searchResult = yield* getWikiSearch(args.query)
 		const firstPage = yield* getPageSource(getFirst(searchResult))
 		const rest = searchResult.pages.slice(1)
+
 		return [
-			`## ${firstPage?.title}`,
-			firstPage?.source,
-			...rest.flatMap((item) => [
-				`## ${item.title} (${item.key})`,
-				item.excerpt,
-			]),
+			`# ${searchResult.pages.at(0)?.title}`,
+			firstPage
+			// '-------',
+			// '# Other Results',
+			// ...rest.flatMap((item) => [
+			// 	`## ${item.title} (${item.key})`,
+			// 	item.excerpt,
 		].join('\n')
 	})
 
